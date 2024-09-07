@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         // Move the spaceship in the direction of the input
-        rb.MovePosition(rb.position + _direction * speed * Time.fixedDeltaTime);
+        rb.velocity = _direction * speed;
         // Point it towards the mouse
         PointToMouse();
     }
