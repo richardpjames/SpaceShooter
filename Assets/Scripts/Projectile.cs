@@ -26,6 +26,8 @@ public class Projectile : MonoBehaviour
         // Ignore the player
         if (collision.gameObject.tag != "Player")
         {
+            // Create a screenshake
+            FXManager.Instance.ShakeCamera();
             // Create sparks
             Instantiate(particlePrefab, transform.position, Quaternion.identity);
             // Finally, desroy the projectile itself
