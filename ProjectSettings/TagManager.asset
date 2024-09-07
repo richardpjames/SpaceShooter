@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 4082487743
+    locked: 0
+  - name: Environment
+    uniqueID: 3750306695
+    locked: 0
+  - name: Ships
+    uniqueID: 266026079
+    locked: 0
