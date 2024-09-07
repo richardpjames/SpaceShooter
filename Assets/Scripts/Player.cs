@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private float speed;
-    [SerializeField] private float slowDownFactor;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float fireCoolDown;
@@ -35,17 +34,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // If the button is being pressed then set the velocity
-        if (_direction != Vector2.zero)
-        {
-            // Move the spaceship in the direction of the input
-            rb.velocity = _direction * speed;
-        }
-        // Otherwise slow down gently
-        else
-        {
-            rb.velocity *= slowDownFactor;
-        }
+        // Using an impulse gives us a slow down effect
+        rb.AddForce(_direction * speed, ForceMode2D.Force);
         // Point it towards the mouse
         PointToMouse();
     }

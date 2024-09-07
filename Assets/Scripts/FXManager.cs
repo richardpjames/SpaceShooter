@@ -8,14 +8,14 @@ public class FXManager : MonoBehaviour
     public static FXManager Instance;
 
     [Header("Camera Shake")]
-    [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private float amplitude = 10f;
     [SerializeField] private float frequency = 10f;
     [SerializeField] private float duration = 0.25f;
-    private bool shaking = false;
+    private CinemachineVirtualCamera _virtualCamera;
+    private bool _shaking = false;
     [Header("Hit Stop")]
     [SerializeField] private float stopDuration = 0.1f;
-    private bool stopping = false;
+    private bool _stopping = false;
 
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class FXManager : MonoBehaviour
 
     public void HitStop()
     {
-        if (!stopping)
+        if (!_stopping)
         {
             StartCoroutine(StopCoroutine());
         }
@@ -42,7 +42,7 @@ public class FXManager : MonoBehaviour
     private IEnumerator StopCoroutine()
     {
         // Set that we are already stopping
-        stopping = true;
+        _stopping = true;
         // Store the current timescale and set to zero
         float prevTimeScale = Time.timeScale;
         Time.timeScale = 0f;
@@ -54,13 +54,13 @@ public class FXManager : MonoBehaviour
         }
         // Reset everything
         Time.timeScale = prevTimeScale;
-        stopping = false;
+        _stopping = false;
     }
 
     public void ShakeCamera()
     {
         // Prevent multiple instances of the camera shaking
-        if (!shaking)
+        if (!_shaking)
         {
             StartCoroutine(ShakeCoroutine());
         }
@@ -69,9 +69,10 @@ public class FXManager : MonoBehaviour
     private IEnumerator ShakeCoroutine()
     {
         // Set that we are shaking
-        shaking = true;
+        _shaking = true;
         // Get the noise component from CineMachine
-        CinemachineBasicMultiChannelPerlin noise = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        _virtualCamera = Object.FindFirstObjectByType<CinemachineVirtualCamera>();
+        CinemachineBasicMultiChannelPerlin noise = _virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         // Up the frequency and amplitude for the duration
         noise.m_AmplitudeGain = amplitude;
         noise.m_FrequencyGain = frequency;
@@ -80,6 +81,7 @@ public class FXManager : MonoBehaviour
         noise.m_AmplitudeGain = 0;
         noise.m_FrequencyGain = 0;
         // Set that we are no longer shaking
-        shaking = false;
+        _shaking = false;
+        Camera.main.transform.rotation = Quaternion.identity;
     }
 }

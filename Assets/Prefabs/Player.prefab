@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6948392592963742127}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 6491193978049778168}
   - component: {fileID: 208893895322138843}
   - component: {fileID: 8019427954895877003}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -81,8 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ed519d59ce0704395f0d7e217740f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  slowDownFactor: 0.97
+  speed: 150
   firePoint: {fileID: 6948392592963742127}
   projectilePrefab: {fileID: 7465167986471587654, guid: f2650529d19e11c459ab7f8de39e36f0, type: 3}
   fireCoolDown: 0.25
@@ -257,7 +256,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 04861220d3689a04cb579cfa9116fbcb, type: 2}
@@ -332,7 +331,7 @@ MonoBehaviour:
   - {x: 2.34, y: -2.38, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 49252
+  m_InstanceId: -1342
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 2.34, y: 2.38, z: 0}
