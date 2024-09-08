@@ -9,6 +9,9 @@ public class Enemy : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float speed = 1f;
+    [Header("Health")]
+    [SerializeField] private int maxHealth = 3;
+    [SerializeField] private GameObject deathParticlePrefab;
     [Header("AI")]
     [SerializeField] private float activationDistance = 50f;
     [SerializeField] private float viewDistance = 50f;
@@ -29,12 +32,14 @@ public class Enemy : MonoBehaviour
     private Vector3 _lastDirection = Vector3.zero;
     private bool _active = false;
     private float _nextFireTime = 0;
+    private int _currentHealth = 0;
     // How many directions will we look?
     private const float VIEW_DIRECTIONS = 60;
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -54,13 +59,19 @@ public class Enemy : MonoBehaviour
         // If the cooldown has expired for our AI evaluation, then evaluate again (must be active)
         if (Time.time > _nextEvaluationTime && _active)
         {
+            // Rotate to face the player
+            PointToPlayer();
+            // Check which direction to move
             _direction = DetermineDirection();
             // Update the timer for next evaluation
             _nextEvaluationTime = Time.time + evaluationCooldown;
         }
         // If we can fire a projectile and can see the player, then attack
-        if (Time.time > _nextFireTime && _active)
+        if (Time.time > _nextFireTime && _active && CanSeePlayer())
         {
+            // Fire a projectile
+            Instantiate(projectilePrefab, firePoint.position, transform.rotation);
+            // Reset the cooldown clock
             _nextFireTime = Time.time + fireCoolDown;
         }
     }
@@ -125,6 +136,51 @@ public class Enemy : MonoBehaviour
         // Retreive the highest weighted direction from the dictionary (and update _lastDirection) based on random list ordering
         _lastDirection = weights.OrderBy(entry => Random.value).FirstOrDefault(entry => entry.Value == weights.Values.Max()).Key;
         return _lastDirection;  
+    }
+
+    private void PointToPlayer()
+    {
+        // Rotate the transform to point towards the mouse
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, GetAngleToPlayer()));
+    }
+
+    public void TakeDamage(int damage = 1)
+    {
+        // Remove the damage from our health
+        _currentHealth -= damage;
+        // If health drops below zero then destroy the object
+        if(_currentHealth < 0)
+        {
+            // Emit particles
+            Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
+            // Destroy
+            Destroy(gameObject);
+        }
+    }
+    private float GetAngleToPlayer()
+    {
+        Player player = Object.FindObjectOfType<Player>();
+        // Get the position of the mouse
+        Vector3 playerPosition = player.transform.position;
+        // Subtract from the mouseposition to account for direction
+        playerPosition.x -= transform.position.x;
+        playerPosition.y -= transform.position.y;
+        // Apply the correct rotation
+        return Mathf.Atan2(playerPosition.y, playerPosition.x) * Mathf.Rad2Deg;
+    }
+
+    private bool CanSeePlayer()
+    {
+        // Get a reference to the player
+        Player player = Object.FindObjectOfType<Player>();
+        // Cast a ray towards the player
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, viewDistance, evaluationLayerMask);
+        // If we hit anything then we can see the player
+        if(hit.collider.tag != "Player")
+        {
+            return false;
+        }
+        return true;
     }
 
     private void OnDrawGizmosSelected()

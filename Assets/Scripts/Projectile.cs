@@ -27,6 +27,12 @@ public class Projectile : MonoBehaviour
         FXManager.Instance.ShakeCamera();
         // Create sparks
         Instantiate(particlePrefab, transform.position, Quaternion.identity);
+        // Check if we hit an enemy
+        if(collision.gameObject.tag == "Enemy")
+        {
+            // Get the enemy script and execute the take damage method
+            collision.gameObject.GetComponent<Enemy>().TakeDamage();
+        }
         // Finally, desroy the projectile itself
         Destroy(gameObject);
     }

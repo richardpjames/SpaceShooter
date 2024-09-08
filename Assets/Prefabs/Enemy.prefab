@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 1990387726684129740}
   m_Layer: 8
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
   - {x: 2.3099995, y: -2.31, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 38652
+  m_InstanceId: 43542
   m_LocalBounds:
     m_Center: {x: -0.00000023841858, y: 0, z: 0}
     m_Extent: {x: 2.3099997, y: 2.31, z: 0}
@@ -225,13 +225,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  maxHealth: 3
+  deathParticlePrefab: {fileID: 4506200808990932732, guid: 34bd995785a5766408485d9e023fa3ed, type: 3}
   activationDistance: 50
   viewDistance: 100
   evaluationDistance: 5
   evaluationCooldown: 0.25
   evaluationLayerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 448
+  playerOnlyLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   desiredPlayerDistanceMin: 30
   desiredPlayerDistanceMax: 40
   projectilePrefab: {fileID: 7465167986471587654, guid: faaa8df6f928e2340a463532b8fb90ee, type: 3}
