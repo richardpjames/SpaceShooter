@@ -176,7 +176,7 @@ public class Enemy : MonoBehaviour
         // Cast a ray towards the player
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, viewDistance, evaluationLayerMask);
         // If we hit anything then we can see the player
-        if(hit.collider.tag != "Player")
+        if(hit.collider && hit.collider.tag != "Player")
         {
             return false;
         }
