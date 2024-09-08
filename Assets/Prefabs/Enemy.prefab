@@ -233,7 +233,7 @@ MonoBehaviour:
   evaluationCooldown: 0.25
   evaluationLayerMask:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 1472
   playerOnlyLayerMask:
     serializedVersion: 2
     m_Bits: 64
