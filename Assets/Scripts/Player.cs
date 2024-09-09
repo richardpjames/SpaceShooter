@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float fireCoolDown;
+    [SerializeField] private GameObject playerDeathParticles;
 
     // For setting the direction of the player
     private Vector2 _direction = Vector2.zero;
@@ -51,12 +52,14 @@ public class Player : MonoBehaviour
         PointToMouse();
     }
 
+    // Handles the input from the user when moving
     public void Move(InputAction.CallbackContext context)
     {
         // Get the input from the user
         _direction = context.ReadValue<Vector2>().normalized;
     }
 
+    // Handles the input from the user when clicking "Fire"
     public void Fire(InputAction.CallbackContext context)
     {
         // Determine the state of whether we are firing from whether the button is pressed
@@ -70,7 +73,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Method for quitting the application
+    // Method for quitting the application TODO: move this to a more sensible place in the code
     public void Quit(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -79,6 +82,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Deals with firing of bullets
     private void FireProjectiles()
     {
         if (Time.time > _nextFireTime)
@@ -112,11 +116,15 @@ public class Player : MonoBehaviour
     // When taking damage simply emit a message (managed by Game Manager)
     public void TakeDamage()
     {
+        // The game manager deals with this logic after an event
         EventManager.OnPlayerHit?.Invoke();
     }
 
+    // When the game manager signals that the player is dead we trigger this
     private void Die()
     {
+        // Plays particles and sets the object to inactive (stopping display and other interactions)
+        Instantiate(playerDeathParticles, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
     }
 }

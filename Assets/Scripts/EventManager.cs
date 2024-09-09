@@ -1,17 +1,22 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
     public static EventManager Instance { get; private set; }
-    // These are the game events
+    // When an enemy is killed
     public static Action OnEnemyKilled;
+    // When a projectile hits a player
     public static Action OnPlayerHit;
+    // When the user requests the game is restarted
     public static Action OnRestartRequested;
+    // When the player is dead
     public static Action OnPlayerDead;
+    // When the players health is updated
     public static Action OnHealthUpdated;
+    // When the score is updated
+    public static Action OnScoreUpdated;
+
 
     private void Awake()
     {

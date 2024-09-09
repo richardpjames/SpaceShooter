@@ -1,50 +1,82 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
+    // Get references to each of the key UI components
     [SerializeField] GameObject restartButton;
+    [SerializeField] GameObject quitButton;
     [SerializeField] Slider healthBar;
-    // Start is called before the first frame update
-    void Awake()
+    [SerializeField] TextMeshProUGUI scoreText;
+
+    // Determine which behaviour to trigger for key game events
+    private void Awake()
     {
-        EventManager.OnPlayerDead += ShowRestartButton;
+        EventManager.OnPlayerDead += ShowButtons;
         EventManager.OnHealthUpdated += UpdateHealthBar;
+        EventManager.OnScoreUpdated += UpdateScore;
+
     }
 
-    void OnDestroy()
+    // Ensure no subscriptions remain after player death
+    private void OnDestroy()
     {
-        EventManager.OnPlayerDead -= ShowRestartButton;
+        EventManager.OnPlayerDead -= ShowButtons;
         EventManager.OnHealthUpdated -= UpdateHealthBar;
+        EventManager.OnScoreUpdated -= UpdateScore;
     }
 
-    void Start()
+    private void Start()
     {
-        HideRestartButton();
+        // When the game starts hide the UI buttons (restart and quit) and update the score
+        HideButtons();
+        scoreText.text = GameManager.Instance.GetScore().ToString();
     }
 
-    private void ShowRestartButton()
+    // Shows all of the buttons on the screen (invoked by events)
+    private void ShowButtons()
     {
+        // Show the restart and quit buttons
         restartButton.SetActive(true);
+        quitButton.SetActive(true);
 
     }
-
-    private void HideRestartButton()
+    // Hides all of the buttons on the screen (invoked by events)
+    private void HideButtons()
     {
+        // Hide the restart and quit buttons
         restartButton.SetActive(false);
+        quitButton.SetActive(false);
     }
 
+    // This happens when the restart button is clicked
     public void RestartClicked()
     {
+        // Trigger the game manager to restart the game
         EventManager.OnRestartRequested?.Invoke();
-        HideRestartButton();
+        // Hide the buttons again
+        HideButtons();
     }
 
+    // This happens when the quit button is clicked
+    public void QuitClicked()
+    {
+        // Simply quit the application
+        Application.Quit();
+    }
+
+    // When health is updated this updates the health bar
     private void UpdateHealthBar()
     {
+        // Casting to floats allows for decimals to be calculated, then sets slider value for the healthbar
         healthBar.value = ((float) GameManager.Instance.GetCurrentHealth() / (float) GameManager.Instance.GetMaxHealth());
+    }
+
+    // When the score is updated this updates the text
+    private void UpdateScore()
+    {
+        // Get the latest score from the game manager
+        scoreText.text = GameManager.Instance.GetScore().ToString();
     }
 }

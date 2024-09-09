@@ -1,18 +1,18 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    // Get reference to the enemy, particles on spawn and the spawn points on the map
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private GameObject enemySpawnParticles;
     [SerializeField] private Transform[] spawnPoints;
-    // Start is called before the first frame update
+
+    // Need to know when an enemy dies so that we can spawn a new one
     void Awake()
     {
         EventManager.OnEnemyKilled += Spawn;
     }
+    // Ensure that no subscriptions are left around
     private void OnDestroy()
     {
         EventManager.OnEnemyKilled -= Spawn;

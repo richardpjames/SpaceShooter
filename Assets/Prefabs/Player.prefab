@@ -85,6 +85,7 @@ MonoBehaviour:
   firePoint: {fileID: 6948392592963742127}
   projectilePrefab: {fileID: 7465167986471587654, guid: f2650529d19e11c459ab7f8de39e36f0, type: 3}
   fireCoolDown: 0.25
+  playerDeathParticles: {fileID: 4506200808990932732, guid: eddfca8c46cc5b6479e5fe01ca6ec098, type: 3}
 --- !u!212 &4699892443307772208
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -303,7 +304,7 @@ MonoBehaviour:
   - {x: 2.34, y: -2.38, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 47950
+  m_InstanceId: 37742
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 2.34, y: 2.38, z: 0}

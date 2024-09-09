@@ -54,3 +54,6 @@ TagManager:
   - name: Ships
     uniqueID: 266026079
     locked: 0
+  - name: UI
+    uniqueID: 536512833
+    locked: 0
