@@ -39,5 +39,5 @@ jobs:
           path: build/${{ matrix.targetPlatform }}
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: build/${{ matrix.targetPlatform }}/SpaceShooter-${{ steps.buildStep.outputs.buildVersion }}-${{ matrix.targetPlatform }}.zip
+          artifacts: build/${{ matrix.targetPlatform }}/SpaceShooter-${{ steps.buildStep.outputs.buildVersion }}-${{ matrix.targetPlatform }}
           tag: ${{ steps.buildStep.outputs.buildVersion }}
