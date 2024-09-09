@@ -34,5 +34,5 @@ jobs:
           versioning: Semantic
       - uses: actions/upload-artifact@v3
         with:
-          name: SpaceShooter-${{ steps.buildStep.outputs.buildVersion }}- ${{ matrix.targetPlatform }}
+          name: SpaceShooter-${{ steps.buildStep.outputs.buildVersion }}-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
