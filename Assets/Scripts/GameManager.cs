@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     [SerializeField] private int maxHealth = 50;
     private int currentHealth;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -40,6 +42,8 @@ public class GameManager : MonoBehaviour
     private void PlayerHit()
     {
         currentHealth--;
+        currentHealth = Math.Max(currentHealth, 0);
+        EventManager.OnHealthUpdated?.Invoke();
         if(currentHealth <= 0)
         {
             EventManager.OnPlayerDead?.Invoke();
@@ -52,6 +56,16 @@ public class GameManager : MonoBehaviour
         currentHealth = maxHealth;
         // Reload the level
         SceneManager.LoadScene("Level");
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
     }
 
 }

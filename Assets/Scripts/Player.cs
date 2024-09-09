@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
     // When taking damage simply emit a message (managed by Game Manager)
     public void TakeDamage()
     {
-        EventManager.OnPlayerHit.Invoke();
+        EventManager.OnPlayerHit?.Invoke();
     }
 
     private void Die()

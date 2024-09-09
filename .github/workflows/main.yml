@@ -1,6 +1,9 @@
 name: Build project
 
-on: [push]
+on: 
+  push:
+    tags:
+      - v*  
 
 jobs:
   buildForAllSupportedPlatforms:
@@ -34,7 +37,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
-          versioning: Semantic
+          versioning: Tag
           buildName: SpaceShooter
       - name: Zip Build
         run: |

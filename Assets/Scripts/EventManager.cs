@@ -11,6 +11,7 @@ public class EventManager : MonoBehaviour
     public static Action OnPlayerHit;
     public static Action OnRestartRequested;
     public static Action OnPlayerDead;
+    public static Action OnHealthUpdated;
 
     private void Awake()
     {
