@@ -38,6 +38,7 @@ jobs:
           buildName: SpaceShooter
       - name: Zip Build
         run: |
+          rm -rf build/${{ matrix.targetPlatform }}/Space Shooter_BurstDebugInformation_DoNotShip
           zip -r SpaceShooter-${{ steps.buildStep.outputs.buildVersion }}-${{ matrix.targetPlatform }}.zip build/${{ matrix.targetPlatform }}/*
       - uses: actions/upload-artifact@v3
         with:
@@ -47,3 +48,4 @@ jobs:
         with:
           artifacts: SpaceShooter-${{ steps.buildStep.outputs.buildVersion }}-${{ matrix.targetPlatform }}.zip
           tag: ${{ steps.buildStep.outputs.buildVersion }}
+          allowUpdates: true
