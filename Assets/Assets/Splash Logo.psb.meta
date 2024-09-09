@@ -94,15 +94,15 @@ ScriptedImporter:
     spritePosition: {x: 0, y: 0}
   mosaicSpriteImportData: []
   rigSpriteImportData:
-  - name: richardpjames
+  - name: richardpjames.com
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 490
+      x: 490
+      y: 395
       width: 388
       height: 108
     spriteID: 29309fe95347c0b45bddded79e40d1d8
@@ -113,8 +113,8 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 490}
-    spritePosition: {x: 62, y: 21}
+    uvTransform: {x: 490, y: 395}
+    spritePosition: {x: 10, y: 21}
   - name: Highlights
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -122,8 +122,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 490
-      y: 395
+      x: 837
+      y: 124
       width: 138
       height: 34
     spriteID: f7d7f6ee81ea69c4982e4b61158e9519
@@ -134,7 +134,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 490, y: 395}
+    uvTransform: {x: 837, y: 124}
     spritePosition: {x: 186, y: 344}
   - name: Eyes
     originalName: 
@@ -245,13 +245,13 @@ ScriptedImporter:
     flatten: 0
     isImported: 0
     isVisible: 1
-  - name: richardpjames
-    spriteName: richardpjames
+  - name: richardpjames.com
+    spriteName: richardpjames.com
     isGroup: 0
     parentIndex: 0
     spriteID: 29309fe95347c0b45bddded79e40d1d8
     layerID: 17
-    mosaicPosition: {x: 4, y: 490}
+    mosaicPosition: {x: 490, y: 395}
     flatten: 0
     isImported: 1
     isVisible: 1
@@ -261,7 +261,7 @@ ScriptedImporter:
     parentIndex: 0
     spriteID: f7d7f6ee81ea69c4982e4b61158e9519
     layerID: 14
-    mosaicPosition: {x: 490, y: 395}
+    mosaicPosition: {x: 837, y: 124}
     flatten: 0
     isImported: 1
     isVisible: 1
