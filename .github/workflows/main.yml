@@ -33,11 +33,15 @@ jobs:
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
           versioning: Semantic
+          buildName: SpaceShooter
+      - name: Zip Build
+        run: |
+          zip -r SpaceShooter-${{ steps.buildStep.outputs.buildVersion }}-${{ matrix.targetPlatform }}.zip build/${{ matrix.targetPlatform }}/*
       - uses: actions/upload-artifact@v3
         with:
           name: SpaceShooter-${{ steps.buildStep.outputs.buildVersion }}-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: build/${{ matrix.targetPlatform }}/SpaceShooter-${{ steps.buildStep.outputs.buildVersion }}-${{ matrix.targetPlatform }}
+          artifacts: SpaceShooter-${{ steps.buildStep.outputs.buildVersion }}-${{ matrix.targetPlatform }}.zip
           tag: ${{ steps.buildStep.outputs.buildVersion }}
