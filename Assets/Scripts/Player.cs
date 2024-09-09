@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
     {
         if (context.performed)
         {
-            Application.Quit();
+            EventManager.OnQuitRequested?.Invoke();
         }
     }
 

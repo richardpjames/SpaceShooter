@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +13,7 @@ public class GameManager : MonoBehaviour
     // Current health and score
     private int currentHealth;
     private int score;
+    private int bestScore;
 
     private void Awake()
     {
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
         EventManager.OnPlayerHit += PlayerHit;
         EventManager.OnRestartRequested += ResetLevel;
         EventManager.OnEnemyKilled += UpdateScore;
+        EventManager.OnQuitRequested += SaveAndQuit;
     }
 
     // When destroying the object do not leave behind any subscriptions
@@ -36,6 +40,7 @@ public class GameManager : MonoBehaviour
         EventManager.OnPlayerHit -= PlayerHit;
         EventManager.OnRestartRequested -= ResetLevel;
         EventManager.OnEnemyKilled -= UpdateScore;
+        EventManager.OnQuitRequested -= SaveAndQuit;
     }
 
     // Called at the very beginning of the game
@@ -44,6 +49,14 @@ public class GameManager : MonoBehaviour
         // Set the health to the max and the score to zero
         currentHealth = maxHealth;
         score = 0;
+        // Load the game and set our previous best
+        bestScore = 0;
+        Save save = LoadGame();
+        if(save != null)
+        {
+            bestScore = save.bestScore;
+        }
+
     }
 
     private void PlayerHit()
@@ -70,13 +83,19 @@ public class GameManager : MonoBehaviour
 
     // Get the current score - used by UI components etc.
     public int GetScore()
-    { 
-        return score; 
+    {
+        return score;
     }
 
     // At the end of the game reset and load the level again
     private void ResetLevel()
     {
+        // Check if we now have a new best
+        if (score > bestScore)
+        {
+            // Update if we do
+            bestScore = score;
+        }
         // Reset the players health back to the max
         currentHealth = maxHealth;
         // Reset the score to zero
@@ -97,4 +116,47 @@ public class GameManager : MonoBehaviour
         return currentHealth;
     }
 
+    // Used by the UI to update the player
+    public int GetBestScore()
+    {
+        return bestScore;
+    }    
+
+    // Save the game and quit when requested
+    private void SaveAndQuit()
+    {
+        // Create a save and write it to disk
+        Save save = new Save();
+        save.bestScore = bestScore;
+        // Save to disk
+        SaveGame(save);
+        // Quit the application
+        Application.Quit();
+    }
+
+    // Serialise and save the game
+    private void SaveGame(Save save)
+    {
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/SpaceShooter.save");
+        binaryFormatter.Serialize(file, save);
+        file.Close();
+    }
+
+    // Deserialise and load the game
+    private Save LoadGame()
+    {
+        // Only load the file if it exists
+        if (File.Exists(Application.persistentDataPath + "/SpaceShooter.save"))
+        {
+            // Read the data into a "save" object and return
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/SpaceShooter.save", FileMode.Open);
+            Save save = (Save) binaryFormatter.Deserialize(file);
+            file.Close();
+            return save;
+        }
+        // If the file is not found then return null
+        return null;
+    }
 }

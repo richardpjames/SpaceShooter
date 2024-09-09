@@ -5,10 +5,11 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
     // Get references to each of the key UI components
-    [SerializeField] GameObject restartButton;
-    [SerializeField] GameObject quitButton;
+    [SerializeField] GameObject buttons;
     [SerializeField] Slider healthBar;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI gameOverText;
+
 
     // Determine which behaviour to trigger for key game events
     private void Awake()
@@ -38,16 +39,32 @@ public class HUD : MonoBehaviour
     private void ShowButtons()
     {
         // Show the restart and quit buttons
-        restartButton.SetActive(true);
-        quitButton.SetActive(true);
+        buttons.SetActive(true);
+        // Update the text that shows for game over
+        int score = GameManager.Instance.GetScore();
+        int bestScore = GameManager.Instance.GetBestScore();
+        // Messages determined by score
+        string message = "";
+        if(score > bestScore)
+        {
+            message = $"Game Over!\n Your Score is {GameManager.Instance.GetScore()}\n That's a New Best!";
 
+        }
+        else if (score == bestScore)
+        {
+            message = $"Game Over!\n Your Score is {GameManager.Instance.GetScore()}\n That's Equal to your Best!";
+        }
+        else
+        {
+            message = $"Game Over!\n Your Score is {GameManager.Instance.GetScore()}\n Your Best was {GameManager.Instance.GetBestScore()}";
+        }
+        gameOverText.text = message;
     }
     // Hides all of the buttons on the screen (invoked by events)
     private void HideButtons()
     {
         // Hide the restart and quit buttons
-        restartButton.SetActive(false);
-        quitButton.SetActive(false);
+        buttons.SetActive(false);
     }
 
     // This happens when the restart button is clicked
@@ -63,14 +80,14 @@ public class HUD : MonoBehaviour
     public void QuitClicked()
     {
         // Simply quit the application
-        Application.Quit();
+        EventManager.OnQuitRequested?.Invoke();
     }
 
     // When health is updated this updates the health bar
     private void UpdateHealthBar()
     {
         // Casting to floats allows for decimals to be calculated, then sets slider value for the healthbar
-        healthBar.value = ((float) GameManager.Instance.GetCurrentHealth() / (float) GameManager.Instance.GetMaxHealth());
+        healthBar.value = ((float)GameManager.Instance.GetCurrentHealth() / (float)GameManager.Instance.GetMaxHealth());
     }
 
     // When the score is updated this updates the text

@@ -16,6 +16,8 @@ public class EventManager : MonoBehaviour
     public static Action OnHealthUpdated;
     // When the score is updated
     public static Action OnScoreUpdated;
+    // To save and quit the game
+    public static Action OnQuitRequested;
 
 
     private void Awake()
