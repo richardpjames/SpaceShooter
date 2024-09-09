@@ -52,11 +52,11 @@ public class HUD : MonoBehaviour
         }
         else if (score == bestScore)
         {
-            message = $"Game Over!\n Your Score is {GameManager.Instance.GetScore()}\n That's Equal to your Best!";
+            message = $"Game Over!\n Your Score is {GameManager.Instance.GetScore()}\n That's Equal to Your Best!";
         }
         else
         {
-            message = $"Game Over!\n Your Score is {GameManager.Instance.GetScore()}\n Your Best was {GameManager.Instance.GetBestScore()}";
+            message = $"Game Over!\n Your Score is {GameManager.Instance.GetScore()}\n Your Top Score is {GameManager.Instance.GetBestScore()}";
         }
         gameOverText.text = message;
     }
