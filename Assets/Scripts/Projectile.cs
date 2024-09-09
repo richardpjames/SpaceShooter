@@ -28,10 +28,14 @@ public class Projectile : MonoBehaviour
         // Create sparks
         Instantiate(particlePrefab, transform.position, Quaternion.identity);
         // Check if we hit an enemy
-        if(collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
             // Get the enemy script and execute the take damage method
             collision.gameObject.GetComponent<Enemy>().TakeDamage();
+        }
+        else if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<Player>().TakeDamage();
         }
         // Finally, desroy the projectile itself
         Destroy(gameObject);

@@ -8,6 +8,9 @@ public class EventManager : MonoBehaviour
     public static EventManager Instance { get; private set; }
     // These are the game events
     public static Action OnEnemyKilled;
+    public static Action OnPlayerHit;
+    public static Action OnRestartRequested;
+    public static Action OnPlayerDead;
 
     private void Awake()
     {

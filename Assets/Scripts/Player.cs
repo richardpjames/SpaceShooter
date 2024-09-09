@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,16 @@ public class Player : MonoBehaviour
     private Vector2 _direction = Vector2.zero;
     private float _nextFireTime = 0;
     private bool _firing = false;
+
+    // Events
+    private void Awake()
+    {
+        EventManager.OnPlayerDead += Die;
+    }
+    private void OnDestroy()
+    {
+        EventManager.OnPlayerDead -= Die;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -96,5 +107,16 @@ public class Player : MonoBehaviour
         mousePosition.y -= objectPosition.y;
         // Apply the correct rotation
         return Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
+    }
+
+    // When taking damage simply emit a message (managed by Game Manager)
+    public void TakeDamage()
+    {
+        EventManager.OnPlayerHit.Invoke();
+    }
+
+    private void Die()
+    {
+        gameObject.SetActive(false);
     }
 }

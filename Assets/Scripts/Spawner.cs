@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject enemySpawnParticles;
     [SerializeField] private Transform[] spawnPoints;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         EventManager.OnEnemyKilled += Spawn;
     }

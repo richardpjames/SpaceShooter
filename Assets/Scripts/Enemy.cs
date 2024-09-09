@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
             // Find the player
             Player player = Object.FindObjectOfType<Player>();
             // Check if the player is within the activation area
-            if (Vector3.Distance(transform.position, player.transform.position) < activationDistance)
+            if (player != null && Vector3.Distance(transform.position, player.transform.position) < activationDistance)
             {
                 _active = true;
             }
@@ -94,6 +94,10 @@ public class Enemy : MonoBehaviour
         Dictionary<Vector3, float> weights = new Dictionary<Vector3, float>();
         // Get a reference to the player to determine distance
         Player player = Object.FindObjectOfType<Player>();
+        if (player == null)
+        {
+            return Vector3.zero;
+        }
         float currentDistanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         // We're going to go around a circle (360 degrees) in the number of view directions
         for(float i = 0; i <= 360f; i += 360f / VIEW_DIRECTIONS)
@@ -156,7 +160,7 @@ public class Enemy : MonoBehaviour
             // Emit particles
             Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
             // Emit an event
-            EventManager.OnEnemyKilled.Invoke();
+            EventManager.OnEnemyKilled?.Invoke();
             // Destroy
             Destroy(gameObject);
         }
@@ -164,6 +168,10 @@ public class Enemy : MonoBehaviour
     private float GetAngleToPlayer()
     {
         Player player = Object.FindObjectOfType<Player>();
+        if (player == null)
+        {
+            return 0;
+        }
         // Get the position of the mouse
         Vector3 playerPosition = player.transform.position;
         // Subtract from the mouseposition to account for direction
@@ -177,6 +185,10 @@ public class Enemy : MonoBehaviour
     {
         // Get a reference to the player
         Player player = Object.FindObjectOfType<Player>();
+        if (player == null)
+        {
+            return false;
+        }
         // Cast a ray towards the player
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, viewDistance, evaluationLayerMask);
         // If we hit anything then we can see the player
@@ -191,6 +203,10 @@ public class Enemy : MonoBehaviour
     {
         // Find the player
         Player player = Object.FindObjectOfType<Player>();
+        if (player == null)
+        {
+            return;
+        }
         // Draw the desired area around the player
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(player.transform.position, desiredPlayerDistanceMin);
