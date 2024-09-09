@@ -48,6 +48,9 @@ TagManager:
   - name: Environment
     uniqueID: 3750306695
     locked: 0
+  - name: Text
+    uniqueID: 2659996949
+    locked: 0
   - name: Ships
     uniqueID: 266026079
     locked: 0

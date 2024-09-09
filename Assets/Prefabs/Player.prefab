@@ -124,7 +124,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 266026079
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -4749425006238948236, guid: 8109221066fae14419b25c65a0cb33ac, type: 3}
   m_Color: {r: 0.8156863, g: 0.21568628, b: 0.5686275, a: 1}
@@ -179,10 +179,6 @@ MonoBehaviour:
     m_ActionId: 40fba66f-07fc-4810-a89d-2ebc881bcd6f
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c80d599e-ea01-443b-bbb9-402e500e57a3
-    m_ActionName: Player/Look[/Mouse/delta,/Pen/delta]
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4483982483556978862}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
@@ -199,45 +195,21 @@ MonoBehaviour:
     m_ActionId: 68f7e7ea-3608-4f14-b568-f83001d1eaed
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5bb9925b-de26-4d22-9119-dea430f93892
-    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ede4d00c-6b38-4f79-8998-434a47b2cad7
-    m_ActionName: UI/Submit[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0dc20960-fa48-441e-bcde-5b504b689c22
-    m_ActionName: UI/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7f646a46-f10b-46e1-b5b9-d9a77a2923ae
-    m_ActionName: UI/Point[/Mouse/position,/Pen/position]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 17774f59-f3a2-48d1-9d65-321a9547c195
-    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5e61e520-9936-45f5-aff2-99f61edf2f73
-    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7f058b87-c814-4b3e-944c-5f0b3ed1ce90
-    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 636b23f3-36aa-404a-bfe0-1722ac12ae15
-    m_ActionName: UI/RightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d77fea06-e869-497d-877a-080fd26d2e76
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: db8060b8-8aee-4fdc-8742-3b53ccc5dc11
-    m_ActionName: UI/TrackedDeviceOrientation
+      m_Calls:
+      - m_Target: {fileID: 4483982483556978862}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Quit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 86bf47d4-4430-4f60-afb7-b0c655850ac3
+    m_ActionName: Player/Quit[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -331,7 +303,7 @@ MonoBehaviour:
   - {x: 2.34, y: -2.38, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 47302
+  m_InstanceId: 47950
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 2.34, y: 2.38, z: 0}

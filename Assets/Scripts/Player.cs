@@ -59,6 +59,15 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Method for quitting the application
+    public void Quit(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Application.Quit();
+        }
+    }
+
     private void FireProjectiles()
     {
         if (Time.time > _nextFireTime)
