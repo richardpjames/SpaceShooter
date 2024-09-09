@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   buildForAllSupportedPlatforms:
+    permissions: write-all  
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     strategy:
