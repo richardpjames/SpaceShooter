@@ -146,7 +146,7 @@ MonoBehaviour:
   - {x: 2.3099995, y: -2.31, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 43542
+  m_InstanceId: 51758
   m_LocalBounds:
     m_Center: {x: -0.00000023841858, y: 0, z: 0}
     m_Extent: {x: 2.3099997, y: 2.31, z: 0}
@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  startActive: 1
   maxHealth: 3
   deathParticlePrefab: {fileID: 4506200808990932732, guid: 34bd995785a5766408485d9e023fa3ed, type: 3}
   activationDistance: 50

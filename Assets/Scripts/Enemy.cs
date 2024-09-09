@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float speed = 1f;
+    [SerializeField] private bool startActive = true;
     [Header("Health")]
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private GameObject deathParticlePrefab;
@@ -40,6 +41,7 @@ public class Enemy : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _currentHealth = maxHealth;
+        _active = startActive;
     }
 
     // Update is called once per frame
@@ -153,6 +155,8 @@ public class Enemy : MonoBehaviour
         {
             // Emit particles
             Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
+            // Emit an event
+            EventManager.OnEnemyKilled.Invoke();
             // Destroy
             Destroy(gameObject);
         }
