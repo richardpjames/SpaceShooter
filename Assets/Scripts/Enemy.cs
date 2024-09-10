@@ -53,6 +53,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_attacking)
+        {
+            // Reset direction if attacking
+            _direction = Vector3.zero;
+        }
         // If we get close enough to the enemy then we want it to activate
         if (!_active)
         {

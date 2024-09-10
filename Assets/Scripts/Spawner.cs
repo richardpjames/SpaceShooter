@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
     // Get reference to the enemy, particles on spawn and the spawn points on the map
     [SerializeField] private GameObject enemySpawnParticles;
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private Wave[] waves;
+    [SerializeField] private List<Wave> waves;
     private int currentWave = -1;
     private int enemiesKilledThisWave = 0;
     private int enemiesInThisWave = 0;
@@ -46,12 +46,12 @@ public class Spawner : MonoBehaviour
     private void Spawn()
     {
         // If all of the enemies are killed (or on first instance these are both zero)
-        if (enemiesKilledThisWave == enemiesInThisWave && waves.Length >= 1)
+        if (enemiesKilledThisWave == enemiesInThisWave && waves.Count >= 1)
         {
             // Increment the wave number
             currentWave++;
             // Cap the wave at the final one
-            currentWave = Mathf.Min(currentWave, waves.Length - 1);
+            currentWave = Mathf.Min(currentWave, waves.Count - 1);
             // Reset enemy counters
             enemiesInThisWave = waves[currentWave].enemies.Count;
             enemiesKilledThisWave = 0;
