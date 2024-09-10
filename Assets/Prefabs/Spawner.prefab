@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5335223583267045718}
   m_Layer: 0
-  m_Name: Spawn Point Middle 3
+  m_Name: Spawn Point Middle Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4811829615197750645}
   m_Layer: 0
-  m_Name: Spawn Point Middle 4
+  m_Name: Spawn Point Middle Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3252876805352114952}
   m_Layer: 0
-  m_Name: Spawn Point Middle 2
+  m_Name: Spawn Point Middle Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1450058205355221510}
   m_Layer: 0
-  m_Name: Spawn Point Middle 1
+  m_Name: Spawn Point Middle Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -300,7 +300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182b4f14b907c4b4ea558f39d7fe13c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
   enemySpawnParticles: {fileID: 4506200808990932732, guid: d120c5a58a63e464aba0dab9abc826fa, type: 3}
   spawnPoints:
   - {fileID: 8866149133326288854}
@@ -311,7 +310,35 @@ MonoBehaviour:
   - {fileID: 3252876805352114952}
   - {fileID: 5335223583267045718}
   - {fileID: 4811829615197750645}
-  difficultyIncrement: 5
   waves:
-  - waveNumber: 0
-    enemies: []
+  - enemies:
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+  - enemies:
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+  - enemies:
+    - {fileID: 3191402003691347645, guid: 3e9fc28750bcbdd4d9a5267134fe2211, type: 3}
+    - {fileID: 3191402003691347645, guid: 3e9fc28750bcbdd4d9a5267134fe2211, type: 3}
+  - enemies:
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+    - {fileID: 3191402003691347645, guid: 3e9fc28750bcbdd4d9a5267134fe2211, type: 3}
+  - enemies:
+    - {fileID: 3191402003691347645, guid: af7b7eda0a536bb4793294b0791f3849, type: 3}
+  - enemies:
+    - {fileID: 3191402003691347645, guid: 3e9fc28750bcbdd4d9a5267134fe2211, type: 3}
+    - {fileID: 3191402003691347645, guid: 3e9fc28750bcbdd4d9a5267134fe2211, type: 3}
+    - {fileID: 3191402003691347645, guid: 3e9fc28750bcbdd4d9a5267134fe2211, type: 3}
+  - enemies:
+    - {fileID: 3191402003691347645, guid: 3e9fc28750bcbdd4d9a5267134fe2211, type: 3}
+    - {fileID: 3191402003691347645, guid: 3e9fc28750bcbdd4d9a5267134fe2211, type: 3}
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}
+    - {fileID: 3191402003691347645, guid: d7ed0eab0da798a4a8a6f187d8175c31, type: 3}

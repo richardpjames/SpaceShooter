@@ -10,6 +10,9 @@ public class Enemy : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float speed = 1f;
     [SerializeField] private bool startActive = true;
+    [SerializeField] private bool boss = false;
+    [SerializeField] private bool followPlayer = true;
+    [SerializeField] private float rotationSpeed = 0f;
     [Header("Health")]
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private GameObject deathParticlePrefab;
@@ -55,11 +58,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_attacking)
-        {
-            // Reset direction if attacking
-            _direction = Vector3.zero;
-        }
         // If we get close enough to the enemy then we want it to activate
         if (!_active)
         {
@@ -71,18 +69,29 @@ public class Enemy : MonoBehaviour
                 _active = true;
             }
         }
-        // If the cooldown has expired for our AI evaluation, then evaluate again (must be active)
-        if (Time.time > _nextEvaluationTime && _active && !_attacking)
+        // If this enemy points towards the player then do so now
+        if (_active && followPlayer)
         {
             // Rotate to face the player
             PointToPlayer();
+        }
+        // Otherwise rotate at the rotation speed
+        else if (_active) 
+        {
+            // Rotate the transform around the z axis (third vector argument) added to existing angle
+            transform.rotation *= Quaternion.Euler(0, 0, rotationSpeed * Time.deltaTime);
+        }
+        // If the cooldown has expired for our AI evaluation, then evaluate again (must be active)
+        if (Time.time > _nextEvaluationTime && _active)
+        {
+
             // Check which direction to move
             _direction = DetermineDirection();
             // Update the timer for next evaluation
             _nextEvaluationTime = Time.time + evaluationCooldown;
         }
         // If we can fire a projectile and can see the player, then attack
-        if (Time.time > _nextFireTime && Time.time > _nextBurtstTime && _active && CanSeePlayer())
+        if (Time.time > _nextFireTime && Time.time > _nextBurtstTime && _active && (CanSeePlayer() || boss))
         {
             // Set to be attacking
             _attacking = true;
@@ -107,15 +116,27 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate()
     {
         // Enemies are still while attacking
-        if (!_attacking)
+        if (!boss && !_attacking)
         {
             // Apply a force in the direction from the evaluation
             _rb.velocity = _direction * speed;
+        }
+        else if (boss)
+        {
+            // If this is a boss then they simply stay static at the center
+            _rb.velocity = Vector3.zero;
+            transform.position = Vector3.zero;
+        }
+        else
+        {
+            _rb.velocity = Vector3.zero;
         }
     }
 
     private Vector2 DetermineDirection()
     {
+        // For boss characters no need to calculate
+        if (boss) return Vector2.zero;
         // Constants for how things are weighted
         const float CLOSER_TO_PLAYER = 2f;
         const float TOO_CLOSE_TO_PLAYER = -50f;

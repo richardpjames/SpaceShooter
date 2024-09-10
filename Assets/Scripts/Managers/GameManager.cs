@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
@@ -102,7 +103,17 @@ public class GameManager : MonoBehaviour
         // Reset the score to zero
         score = 0;
         // Reload the level
-        SceneManager.LoadScene("Level");
+        StartCoroutine(LoadLevel("Level"));
+    }
+
+    private static IEnumerator LoadLevel(string sceneName)
+    {
+        // Load th el
+        AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        while (!asyncLoadLevel.isDone)
+        {
+            yield return null;
+        }
         // Signal that a new game is started
         EventManager.OnNewGame?.Invoke();
     }

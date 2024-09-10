@@ -30,7 +30,7 @@ public class ProjectileManager : MonoBehaviour
         }
         if(pattern == Pattern.CIRCLE)
         {
-            FireCircle(projectile, startPosition);
+            FireCircle(projectile, startPosition, rotation);
         }
     }
 
@@ -42,14 +42,14 @@ public class ProjectileManager : MonoBehaviour
     }
 
     // Fires multiple projectiles in a circle from the start position (all at the same time)
-    private void FireCircle(GameObject projectile, Vector2 startPosition)
+    private void FireCircle(GameObject projectile, Vector2 startPosition, Quaternion rotation)
     {
         const int FIRE_DIRECTIONS = 16;
         // Loop through the number of directions and spawn projectiles
         for (float i = 0; i <= 360f; i += 360f / FIRE_DIRECTIONS)
         {
             // Spawn with a rotate around the z axis the amount of i
-            Instantiate(projectile, startPosition, Quaternion.Euler(0,0,i));
+            Instantiate(projectile, startPosition, rotation * Quaternion.Euler(0,0,i));
         }
     }
 }

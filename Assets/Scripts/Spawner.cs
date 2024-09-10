@@ -40,7 +40,7 @@ public class Spawner : MonoBehaviour
         enemiesKilledThisWave = 0;
         // Spawn the first wave
         Spawn();
-    }    
+    }
 
     // Update is called once per frame
     private void Spawn()

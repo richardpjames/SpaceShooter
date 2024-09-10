@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 6722798854068726301}
   - component: {fileID: 1990387726684129740}
   m_Layer: 8
-  m_Name: Continuous Circle Enemy
+  m_Name: FirstBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -1395676563060310001, guid: 94e6f5af3dfb31140bd7a79bf070fe02, type: 3}
-  m_Color: {r: 0.44561446, g: 0.99607843, b: 0.42352945, a: 1}
+  m_Color: {r: 1, g: 0.116780184, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
   - {x: 2.3099995, y: -2.31, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 97414
+  m_InstanceId: 122840
   m_LocalBounds:
     m_Center: {x: -0.00000023841858, y: 0, z: 0}
     m_Extent: {x: 2.3099997, y: 2.31, z: 0}
@@ -226,12 +226,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   startActive: 1
-  maxHealth: 3
-  deathParticlePrefab: {fileID: 4506200808990932732, guid: 34bd995785a5766408485d9e023fa3ed, type: 3}
+  boss: 1
+  followPlayer: 0
+  rotationSpeed: 10
+  maxHealth: 50
+  deathParticlePrefab: {fileID: 4506200808990932732, guid: caceaa7b4ad5ec84883920e54ae5c43d, type: 3}
   activationDistance: 50
   viewDistance: 100
   evaluationDistance: 5
-  evaluationCooldown: 0.25
+  evaluationCooldown: 0
   evaluationLayerMask:
     serializedVersion: 2
     m_Bits: 1472
@@ -243,6 +246,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7465167986471587654, guid: faaa8df6f928e2340a463532b8fb90ee, type: 3}
   attackPattern: 1
   firePoint: {fileID: 6390519920336016241}
-  fireCoolDown: 0.25
-  burstCooldown: 1
-  burstNumber: 20
+  fireCoolDown: 0.15
+  burstCooldown: 5
+  burstNumber: 200
+  startupTime: 1
