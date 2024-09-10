@@ -8,6 +8,7 @@ public class HUD : MonoBehaviour
     [SerializeField] GameObject buttons;
     [SerializeField] Slider healthBar;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI waveText;
     [SerializeField] TextMeshProUGUI gameOverText;
 
 
@@ -17,7 +18,7 @@ public class HUD : MonoBehaviour
         EventManager.OnPlayerDead += ShowButtons;
         EventManager.OnHealthUpdated += UpdateHealthBar;
         EventManager.OnScoreUpdated += UpdateScore;
-
+        EventManager.OnNewWave += UpdateWave;
     }
 
     // Ensure no subscriptions remain after player death
@@ -26,13 +27,16 @@ public class HUD : MonoBehaviour
         EventManager.OnPlayerDead -= ShowButtons;
         EventManager.OnHealthUpdated -= UpdateHealthBar;
         EventManager.OnScoreUpdated -= UpdateScore;
+        EventManager.OnNewWave -= UpdateWave;
     }
 
     private void Start()
     {
         // When the game starts hide the UI buttons (restart and quit) and update the score
         HideButtons();
-        scoreText.text = GameManager.Instance.GetScore().ToString();
+        scoreText.text = $"Score: 0";
+        waveText.text = $"Wave: 0";
+
     }
 
     // Shows all of the buttons on the screen (invoked by events)
@@ -94,6 +98,12 @@ public class HUD : MonoBehaviour
     private void UpdateScore()
     {
         // Get the latest score from the game manager
-        scoreText.text = GameManager.Instance.GetScore().ToString();
+        scoreText.text = $"Score: {GameManager.Instance.GetScore().ToString()}";
+    }
+
+    // When the save is updated update the text
+    private void UpdateWave(int wave)
+    {
+        waveText.text = $"Wave: {wave.ToString()}";
     }
 }

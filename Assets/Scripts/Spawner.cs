@@ -64,6 +64,8 @@ public class Spawner : MonoBehaviour
                 Instantiate(enemySpawnParticles, spawnPoints[random].position, Quaternion.identity);
                 Instantiate(enemy, spawnPoints[random].position, Quaternion.identity);
             }
+            // Used to update the UI etc.
+            EventManager.OnNewWave?.Invoke(currentWave + 1);
         }
     }
 

@@ -20,6 +20,8 @@ public class EventManager : MonoBehaviour
     public static Action OnScoreUpdated;
     // To save and quit the game
     public static Action OnQuitRequested;
+    // After each wave is generated
+    public static Action<int> OnNewWave;
 
 
     private void Awake()
