@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float fireCoolDown = 0.25f;
     [SerializeField] private float burstCooldown = 2f;
     [SerializeField] private int burstNumber = 5;
+    [SerializeField] private float startupTime = 1f;
     // Private variables
     private float _nextEvaluationTime = 0;
     private Vector2 _direction;
@@ -48,6 +49,7 @@ public class Enemy : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _currentHealth = maxHealth;
         _active = startActive;
+        _nextBurtstTime = Time.time + startupTime;
     }
 
     // Update is called once per frame
