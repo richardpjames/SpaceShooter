@@ -10,6 +10,8 @@ public class EventManager : MonoBehaviour
     public static Action OnPlayerHit;
     // When the user requests the game is restarted
     public static Action OnRestartRequested;
+    // When a new game is started
+    public static Action OnNewGame;
     // When the player is dead
     public static Action OnPlayerDead;
     // When the players health is updated

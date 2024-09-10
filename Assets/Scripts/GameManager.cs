@@ -56,7 +56,8 @@ public class GameManager : MonoBehaviour
         {
             bestScore = save.bestScore;
         }
-
+        // Notify that a new game has started
+        EventManager.OnNewGame?.Invoke();
     }
 
     private void PlayerHit()
@@ -102,6 +103,8 @@ public class GameManager : MonoBehaviour
         score = 0;
         // Reload the level
         SceneManager.LoadScene("Level");
+        // Signal that a new game is started
+        EventManager.OnNewGame?.Invoke();
     }
 
     // Used by the healthbar to determine what percentage of health remains
