@@ -24,8 +24,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float desiredPlayerDistanceMax = 10f;
     [Header("Projectiles")]
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private ProjectileManager.Pattern attackPattern;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float fireCoolDown = 0.25f;
+    [SerializeField] private float burstCooldown = 2f;
+    [SerializeField] private int burstNumber = 5;
     // Private variables
     private float _nextEvaluationTime = 0;
     private Vector2 _direction;
@@ -33,7 +36,10 @@ public class Enemy : MonoBehaviour
     private Vector3 _lastDirection = Vector3.zero;
     private bool _active = false;
     private float _nextFireTime = 0;
+    private float _nextBurtstTime = 0;
+    private int _currentBurstCounter = 0;
     private int _currentHealth = 0;
+    private bool _attacking = false;
     // How many directions will we look?
     private const float VIEW_DIRECTIONS = 60;
     // Start is called before the first frame update
@@ -59,7 +65,7 @@ public class Enemy : MonoBehaviour
             }
         }
         // If the cooldown has expired for our AI evaluation, then evaluate again (must be active)
-        if (Time.time > _nextEvaluationTime && _active)
+        if (Time.time > _nextEvaluationTime && _active && !_attacking)
         {
             // Rotate to face the player
             PointToPlayer();
@@ -69,19 +75,36 @@ public class Enemy : MonoBehaviour
             _nextEvaluationTime = Time.time + evaluationCooldown;
         }
         // If we can fire a projectile and can see the player, then attack
-        if (Time.time > _nextFireTime && _active && CanSeePlayer())
+        if (Time.time > _nextFireTime && Time.time > _nextBurtstTime && _active && CanSeePlayer())
         {
+            // Set to be attacking
+            _attacking = true;
             // Fire a projectile
-            Instantiate(projectilePrefab, firePoint.position, transform.rotation);
+            ProjectileManager.Instance.Fire(attackPattern, projectilePrefab, firePoint.position, transform.rotation);
             // Reset the cooldown clock
             _nextFireTime = Time.time + fireCoolDown;
+            // The number of bullets fired in this burst
+            _currentBurstCounter++;
+            // If we have hit the limit for this burst
+            if (_currentBurstCounter == burstNumber)
+            {
+                // Set the next fire time and the burst counter back to zero
+                _nextBurtstTime = Time.time + burstCooldown;
+                _currentBurstCounter = 0;
+                // After a burst is complete, the attack is over
+                _attacking = false;
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        // Apply a force in the direction from the evaluation
-        _rb.velocity = _direction * speed;
+        // Enemies are still while attacking
+        if (!_attacking)
+        {
+            // Apply a force in the direction from the evaluation
+            _rb.velocity = _direction * speed;
+        }
     }
 
     private Vector2 DetermineDirection()
@@ -100,7 +123,7 @@ public class Enemy : MonoBehaviour
         }
         float currentDistanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         // We're going to go around a circle (360 degrees) in the number of view directions
-        for(float i = 0; i <= 360f; i += 360f / VIEW_DIRECTIONS)
+        for (float i = 0; i <= 360f; i += 360f / VIEW_DIRECTIONS)
         {
             // The destination vector for our ray trace (up represents y axis)
             Vector3 destination = Vector3.up;
@@ -112,12 +135,12 @@ public class Enemy : MonoBehaviour
             float newDistanceToPlayer = Vector3.Distance(transform.position + (destination * evaluationDistance), player.transform.position);
             float weight = 5f;
             // See if this takes us closer to the player and we are too far away
-            if(newDistanceToPlayer < currentDistanceToPlayer && currentDistanceToPlayer > desiredPlayerDistanceMax)
+            if (newDistanceToPlayer < currentDistanceToPlayer && currentDistanceToPlayer > desiredPlayerDistanceMax)
             {
                 weight += CLOSER_TO_PLAYER;
             }
             // See if we are too close!
-            if(newDistanceToPlayer < desiredPlayerDistanceMin)
+            if (newDistanceToPlayer < desiredPlayerDistanceMin)
             {
                 weight += TOO_CLOSE_TO_PLAYER;
             }
@@ -135,13 +158,13 @@ public class Enemy : MonoBehaviour
             Debug.DrawLine(transform.position, transform.position + (destination * weight), Color.white, evaluationCooldown);
         }
         // If the last direction we headed is still the max, then return the same to avoid jittering
-        if(_lastDirection != Vector3.zero && weights.Values.Max() == weights[_lastDirection])
+        if (_lastDirection != Vector3.zero && weights.Values.Max() == weights[_lastDirection])
         {
             return _lastDirection;
         }
         // Retreive the highest weighted direction from the dictionary (and update _lastDirection) based on random list ordering
         _lastDirection = weights.OrderBy(entry => Random.value).FirstOrDefault(entry => entry.Value == weights.Values.Max()).Key;
-        return _lastDirection;  
+        return _lastDirection;
     }
 
     private void PointToPlayer()
@@ -155,7 +178,7 @@ public class Enemy : MonoBehaviour
         // Remove the damage from our health
         _currentHealth -= damage;
         // If health drops below zero then destroy the object
-        if(_currentHealth < 0)
+        if (_currentHealth < 0)
         {
             // Emit particles
             Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
@@ -192,7 +215,7 @@ public class Enemy : MonoBehaviour
         // Cast a ray towards the player
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, viewDistance, evaluationLayerMask);
         // If we hit anything then we can see the player
-        if(hit.collider && hit.collider.tag != "Player")
+        if (hit.collider && hit.collider.tag != "Player")
         {
             return false;
         }
@@ -213,7 +236,7 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(player.transform.position, desiredPlayerDistanceMax);
         // Draw the activation circle
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, activationDistance); 
+        Gizmos.DrawWireSphere(transform.position, activationDistance);
         // Draw the evaluation circle
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, evaluationDistance);

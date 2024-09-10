@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         if (Time.time > _nextFireTime)
         {
             // Instantiate a projectile facing towards the mouse
-            Instantiate(projectilePrefab, firePoint.position, transform.rotation);
+            ProjectileManager.Instance.Fire(ProjectileManager.Pattern.SINGLE, projectilePrefab, firePoint.position, transform.rotation);
             // When can we fire next?
             _nextFireTime = Time.time + fireCoolDown;
         }

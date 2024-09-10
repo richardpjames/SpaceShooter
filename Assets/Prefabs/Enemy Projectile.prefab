@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 266026079
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0.9960785, g: 0.42352945, b: 0.5647059, a: 1}
@@ -161,6 +161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c241e98d86af67149bbafc2fb850c976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 75
+  speed: 50
   lifetime: 3
   particlePrefab: {fileID: 4506200808990932732, guid: 272a8f0e1f34b0f4dacdd694e4f8a295, type: 3}
+  sinMagnitude: 0
+  sinFrequency: 0
+  jitter: 0

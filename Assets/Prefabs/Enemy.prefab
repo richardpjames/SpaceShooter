@@ -146,7 +146,7 @@ MonoBehaviour:
   - {x: 2.3099995, y: -2.31, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 79076
+  m_InstanceId: 88498
   m_LocalBounds:
     m_Center: {x: -0.00000023841858, y: 0, z: 0}
     m_Extent: {x: 2.3099997, y: 2.31, z: 0}
@@ -241,5 +241,8 @@ MonoBehaviour:
   desiredPlayerDistanceMin: 30
   desiredPlayerDistanceMax: 40
   projectilePrefab: {fileID: 7465167986471587654, guid: faaa8df6f928e2340a463532b8fb90ee, type: 3}
+  attackPattern: 0
   firePoint: {fileID: 6390519920336016241}
-  fireCoolDown: 0.25
+  fireCoolDown: 0
+  burstCooldown: 0.25
+  burstNumber: 1
