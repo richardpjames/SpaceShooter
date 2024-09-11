@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CommonParticles : MonoBehaviour
@@ -20,7 +18,7 @@ public class CommonParticles : MonoBehaviour
         // Also check that the application is not quitting
         if (deathParticles != null && !isQuitting)
         {
-            Instantiate(spawnParticles, transform.position, Quaternion.identity);
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
         }
     }
     // If the application is quitting then don't spawn OnDestroy particles
