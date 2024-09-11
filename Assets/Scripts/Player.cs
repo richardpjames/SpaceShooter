@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float fireCoolDown;
-    [SerializeField] private GameObject playerDeathParticles;
 
     // For setting the direction of the player
     private Vector2 _direction = Vector2.zero;
@@ -123,8 +122,6 @@ public class Player : MonoBehaviour
     // When the game manager signals that the player is dead we trigger this
     private void Die()
     {
-        // Plays particles and sets the object to inactive (stopping display and other interactions)
-        Instantiate(playerDeathParticles, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
     }
 }

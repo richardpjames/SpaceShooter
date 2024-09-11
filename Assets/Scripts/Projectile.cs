@@ -4,7 +4,6 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float lifetime;
-    [SerializeField] private GameObject particlePrefab;
     // Magnitude sets how big the side to side and frequency how often
     [SerializeField] private float sinMagnitude;
     [SerializeField] private float sinFrequency;
@@ -45,8 +44,6 @@ public class Projectile : MonoBehaviour
     {
         // Create a screenshake
         FXManager.Instance.ShakeCamera();
-        // Create sparks
-        Instantiate(particlePrefab, transform.position, Quaternion.identity);
         // Check if we hit an enemy
         if (collision.gameObject.tag == "Enemy")
         {

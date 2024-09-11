@@ -15,7 +15,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float rotationSpeed = 0f;
     [Header("Health")]
     [SerializeField] private int maxHealth = 3;
-    [SerializeField] private GameObject deathParticlePrefab;
     [Header("AI")]
     [SerializeField] private float activationDistance = 50f;
     [SerializeField] private float viewDistance = 50f;
@@ -208,8 +207,6 @@ public class Enemy : MonoBehaviour
         // If health drops below zero then destroy the object
         if (_currentHealth < 0)
         {
-            // Emit particles
-            Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
             // Emit an event
             EventManager.OnEnemyKilled?.Invoke();
             // Destroy

@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 2074794471124382764}
   - component: {fileID: 6722798854068726301}
   - component: {fileID: 1990387726684129740}
+  - component: {fileID: -5033595466088522524}
   m_Layer: 8
   m_Name: Basic Enemy
   m_TagString: Enemy
@@ -250,3 +251,17 @@ MonoBehaviour:
   burstCooldown: 0.5
   burstNumber: 3
   startupTime: 1
+--- !u!114 &-5033595466088522524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3191402003691347645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f142df45db6e577488f3bccb8f0232be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnParticles: {fileID: 4506200808990932732, guid: d120c5a58a63e464aba0dab9abc826fa, type: 3}
+  deathParticles: {fileID: 4506200808990932732, guid: 34bd995785a5766408485d9e023fa3ed, type: 3}

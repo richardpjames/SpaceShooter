@@ -4,7 +4,6 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     // Get reference to the enemy, particles on spawn and the spawn points on the map
-    [SerializeField] private GameObject enemySpawnParticles;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private List<Wave> waves;
     private int currentWave = -1;
@@ -61,7 +60,6 @@ public class Spawner : MonoBehaviour
                 // Pick a random spawn point
                 int random = Random.Range(0, spawnPoints.Length);
                 // Spawn an enemy at that point
-                Instantiate(enemySpawnParticles, spawnPoints[random].position, Quaternion.identity);
                 Instantiate(enemy, spawnPoints[random].position, Quaternion.identity);
             }
             // Used to update the UI etc.

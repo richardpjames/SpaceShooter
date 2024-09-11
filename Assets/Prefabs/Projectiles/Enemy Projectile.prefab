@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1011640888029534146}
   - component: {fileID: 2105362030999845437}
   - component: {fileID: 7801482456043858380}
+  - component: {fileID: -7865401135147833824}
   m_Layer: 9
   m_Name: Enemy Projectile
   m_TagString: Untagged
@@ -167,3 +168,17 @@ MonoBehaviour:
   sinMagnitude: 0
   sinFrequency: 0
   jitter: 0
+--- !u!114 &-7865401135147833824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7465167986471587654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f142df45db6e577488f3bccb8f0232be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnParticles: {fileID: 0}
+  deathParticles: {fileID: 4506200808990932732, guid: 272a8f0e1f34b0f4dacdd694e4f8a295, type: 3}
