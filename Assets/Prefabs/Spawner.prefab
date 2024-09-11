@@ -300,7 +300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182b4f14b907c4b4ea558f39d7fe13c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnParticles: {fileID: 4506200808990932732, guid: d120c5a58a63e464aba0dab9abc826fa, type: 3}
   spawnPoints:
   - {fileID: 8866149133326288854}
   - {fileID: 6278777386708810817}

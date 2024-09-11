@@ -1,9 +1,16 @@
+using MoreMountains.Feedbacks;
 using System;
 
 public class PlayerHealth : Health
 {
     public override void TakeDamage(int damage)
     {
+        // Play any effects that are present
+        if (hitEffects != null)
+        {
+            hitEffects.PlayFeedbacks();
+        }
+        // Trigger feedback
         _currentHealth = _currentHealth - damage;
         _currentHealth = Math.Max(_currentHealth, 0);
         // Signal to other components that the player health is updated
