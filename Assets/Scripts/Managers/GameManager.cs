@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         // Subscribe to required events
-        EventManager.OnPlayerHit += PlayerHit;
         EventManager.OnRestartRequested += ResetLevel;
         EventManager.OnEnemyKilled += UpdateScore;
         EventManager.OnQuitRequested += SaveAndQuit;
@@ -38,7 +37,6 @@ public class GameManager : MonoBehaviour
     // When destroying the object do not leave behind any subscriptions
     private void OnDestroy()
     {
-        EventManager.OnPlayerHit -= PlayerHit;
         EventManager.OnRestartRequested -= ResetLevel;
         EventManager.OnEnemyKilled -= UpdateScore;
         EventManager.OnQuitRequested -= SaveAndQuit;
@@ -53,7 +51,7 @@ public class GameManager : MonoBehaviour
         // Load the game and set our previous best
         bestScore = 0;
         Save save = LoadGame();
-        if(save != null)
+        if (save != null)
         {
             bestScore = save.bestScore;
         }
@@ -61,18 +59,10 @@ public class GameManager : MonoBehaviour
         EventManager.OnNewGame?.Invoke();
     }
 
-    private void PlayerHit()
+    public void EndGame()
     {
-        // If the player is hit then decrease their health by 1 (don't allow less than zero health)
-        currentHealth--;
-        currentHealth = Math.Max(currentHealth, 0);
-        // Let other components know that the health has been updated
-        EventManager.OnHealthUpdated?.Invoke();
-        // If the health is less than zero then tell other components the player is dead
-        if (currentHealth <= 0)
-        {
-            EventManager.OnPlayerDead?.Invoke();
-        }
+        // Signal out to all components that the game has ended
+        EventManager.OnPlayerDead?.Invoke();
     }
 
     private void UpdateScore()
@@ -134,7 +124,7 @@ public class GameManager : MonoBehaviour
     public int GetBestScore()
     {
         return bestScore;
-    }    
+    }
 
     // Save the game and quit when requested
     private void SaveAndQuit()
@@ -166,7 +156,7 @@ public class GameManager : MonoBehaviour
             // Read the data into a "save" object and return
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/SpaceShooter.save", FileMode.Open);
-            Save save = (Save) binaryFormatter.Deserialize(file);
+            Save save = (Save)binaryFormatter.Deserialize(file);
             file.Close();
             return save;
         }

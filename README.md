@@ -1,5 +1,6 @@
 # Space Shooter
 
 ## Install and Build
-In order to build this project, the following must be installed in a directory called "ThirdParty" within the assets folder
+In order to build this project, the following additional packages are required
  - TextMeshPro
+ - Top Down Engine by More Mountains 

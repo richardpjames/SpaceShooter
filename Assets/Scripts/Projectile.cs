@@ -42,17 +42,11 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Create a screenshake
-        FXManager.Instance.ShakeCamera();
-        // Check if we hit an enemy
-        if (collision.gameObject.tag == "Enemy")
+        // Get the health script from whatever we hit
+        Health health = collision.gameObject.GetComponent<Health>();
+        if(health != null)
         {
-            // Get the enemy script and execute the take damage method
-            collision.gameObject.GetComponent<Enemy>().TakeDamage();
-        }
-        else if (collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<Player>().TakeDamage();
+            health.TakeDamage(1);
         }
         // Finally, desroy the projectile itself
         Destroy(gameObject);

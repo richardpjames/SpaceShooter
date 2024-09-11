@@ -6,8 +6,6 @@ public class EventManager : MonoBehaviour
     public static EventManager Instance { get; private set; }
     // When an enemy is killed
     public static Action OnEnemyKilled;
-    // When a projectile hits a player
-    public static Action OnPlayerHit;
     // When the user requests the game is restarted
     public static Action OnRestartRequested;
     // When a new game is started
@@ -15,7 +13,7 @@ public class EventManager : MonoBehaviour
     // When the player is dead
     public static Action OnPlayerDead;
     // When the players health is updated
-    public static Action OnHealthUpdated;
+    public static Action<int, int> OnHealthUpdated;
     // When the score is updated
     public static Action OnScoreUpdated;
     // To save and quit the game

@@ -49,7 +49,7 @@ public class HUD : MonoBehaviour
         int bestScore = GameManager.Instance.GetBestScore();
         // Messages determined by score
         string message = "";
-        if(score > bestScore)
+        if (score > bestScore)
         {
             message = $"Game Over!\n Your Score is {GameManager.Instance.GetScore()}\n That's a New Best!";
 
@@ -88,10 +88,10 @@ public class HUD : MonoBehaviour
     }
 
     // When health is updated this updates the health bar
-    private void UpdateHealthBar()
+    private void UpdateHealthBar(int currentHealth, int maxHealth)
     {
         // Casting to floats allows for decimals to be calculated, then sets slider value for the healthbar
-        healthBar.value = ((float)GameManager.Instance.GetCurrentHealth() / (float)GameManager.Instance.GetMaxHealth());
+        healthBar.value = ((float)currentHealth / (float)maxHealth);
     }
 
     // When the score is updated this updates the text

@@ -13,8 +13,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool boss = false;
     [SerializeField] private bool followPlayer = true;
     [SerializeField] private float rotationSpeed = 0f;
-    [Header("Health")]
-    [SerializeField] private int maxHealth = 3;
     [Header("AI")]
     [SerializeField] private float activationDistance = 50f;
     [SerializeField] private float viewDistance = 50f;
@@ -41,7 +39,6 @@ public class Enemy : MonoBehaviour
     private float _nextFireTime = 0;
     private float _nextBurtstTime = 0;
     private int _currentBurstCounter = 0;
-    private int _currentHealth = 0;
     private bool _attacking = false;
     // How many directions will we look?
     private const float VIEW_DIRECTIONS = 60;
@@ -49,9 +46,13 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _currentHealth = maxHealth;
         _active = startActive;
         _nextBurtstTime = Time.time + startupTime;
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.OnEnemyKilled?.Invoke();
     }
 
     // Update is called once per frame
@@ -200,19 +201,6 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, GetAngleToPlayer()));
     }
 
-    public void TakeDamage(int damage = 1)
-    {
-        // Remove the damage from our health
-        _currentHealth -= damage;
-        // If health drops below zero then destroy the object
-        if (_currentHealth < 0)
-        {
-            // Emit an event
-            EventManager.OnEnemyKilled?.Invoke();
-            // Destroy
-            Destroy(gameObject);
-        }
-    }
     private float GetAngleToPlayer()
     {
         Player player = Object.FindObjectOfType<Player>();

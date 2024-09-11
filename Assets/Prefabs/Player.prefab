@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9153495278908794224}
   - component: {fileID: 4483982483556978862}
+  - component: {fileID: 3761421361625658180}
   - component: {fileID: 4699892443307772208}
   - component: {fileID: 4222708032303851569}
   - component: {fileID: 6491193978049778168}
@@ -86,7 +87,19 @@ MonoBehaviour:
   firePoint: {fileID: 6948392592963742127}
   projectilePrefab: {fileID: 7465167986471587654, guid: f2650529d19e11c459ab7f8de39e36f0, type: 3}
   fireCoolDown: 0.12
-  playerDeathParticles: {fileID: 4506200808990932732, guid: eddfca8c46cc5b6479e5fe01ca6ec098, type: 3}
+--- !u!114 &3761421361625658180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7523895411473613885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe74ed6fed278a418109655118fd868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!212 &4699892443307772208
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -305,7 +318,7 @@ MonoBehaviour:
   - {x: 2.34, y: -2.38, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 137206
+  m_InstanceId: 132826
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 2.34, y: 2.38, z: 0}

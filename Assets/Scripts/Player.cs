@@ -17,16 +17,6 @@ public class Player : MonoBehaviour
     private float _nextFireTime = 0;
     private bool _firing = false;
 
-    // Events
-    private void Awake()
-    {
-        EventManager.OnPlayerDead += Die;
-    }
-    private void OnDestroy()
-    {
-        EventManager.OnPlayerDead -= Die;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -110,18 +100,5 @@ public class Player : MonoBehaviour
         mousePosition.y -= objectPosition.y;
         // Apply the correct rotation
         return Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
-    }
-
-    // When taking damage simply emit a message (managed by Game Manager)
-    public void TakeDamage()
-    {
-        // The game manager deals with this logic after an event
-        EventManager.OnPlayerHit?.Invoke();
-    }
-
-    // When the game manager signals that the player is dead we trigger this
-    private void Die()
-    {
-        gameObject.SetActive(false);
     }
 }

@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 6722798854068726301}
   - component: {fileID: 1990387726684129740}
   - component: {fileID: -5033595466088522524}
+  - component: {fileID: 3665132063423912823}
   m_Layer: 8
   m_Name: Basic Enemy
   m_TagString: Enemy
@@ -147,7 +148,7 @@ MonoBehaviour:
   - {x: 2.3099995, y: -2.31, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 142890
+  m_InstanceId: 133050
   m_LocalBounds:
     m_Center: {x: -0.00000023841858, y: 0, z: 0}
     m_Extent: {x: 2.3099997, y: 2.31, z: 0}
@@ -230,8 +231,6 @@ MonoBehaviour:
   boss: 0
   followPlayer: 1
   rotationSpeed: 0
-  maxHealth: 3
-  deathParticlePrefab: {fileID: 4506200808990932732, guid: 34bd995785a5766408485d9e023fa3ed, type: 3}
   activationDistance: 50
   viewDistance: 100
   evaluationDistance: 5
@@ -265,3 +264,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnParticles: {fileID: 4506200808990932732, guid: d120c5a58a63e464aba0dab9abc826fa, type: 3}
   deathParticles: {fileID: 4506200808990932732, guid: 34bd995785a5766408485d9e023fa3ed, type: 3}
+--- !u!114 &3665132063423912823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3191402003691347645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 653b9fef8a46b1f4c857b4958b918079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
