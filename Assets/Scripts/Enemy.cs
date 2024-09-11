@@ -11,7 +11,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float speed = 1f;
     [SerializeField] private bool startActive = true;
     [SerializeField] private bool boss = false;
-    [SerializeField] private bool followPlayer = true;
     [SerializeField] private float rotationSpeed = 0f;
     [Header("AI")]
     [SerializeField] private float activationDistance = 50f;
@@ -40,6 +39,7 @@ public class Enemy : MonoBehaviour
     private float _nextBurtstTime = 0;
     private int _currentBurstCounter = 0;
     private bool _attacking = false;
+    private bool isQuitting = false;
     // How many directions will we look?
     private const float VIEW_DIRECTIONS = 60;
     // Start is called before the first frame update
@@ -52,7 +52,16 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventManager.OnEnemyKilled?.Invoke();
+        // If the application isn't quitting then inform of an enemy death
+        if (!isQuitting)
+        {
+            EventManager.OnEnemyKilled?.Invoke();
+        }
+    }
+
+    void OnApplicationQuit()
+    {
+        isQuitting = true;
     }
 
     // Update is called once per frame
@@ -69,14 +78,8 @@ public class Enemy : MonoBehaviour
                 _active = true;
             }
         }
-        // If this enemy points towards the player then do so now
-        if (_active && followPlayer)
-        {
-            // Rotate to face the player
-            PointToPlayer();
-        }
         // Otherwise rotate at the rotation speed
-        else if (_active) 
+        else if (_active)
         {
             // Rotate the transform around the z axis (third vector argument) added to existing angle
             transform.rotation *= Quaternion.Euler(0, 0, rotationSpeed * Time.deltaTime);
@@ -193,28 +196,6 @@ public class Enemy : MonoBehaviour
         // Retreive the highest weighted direction from the dictionary (and update _lastDirection) based on random list ordering
         _lastDirection = weights.OrderBy(entry => Random.value).FirstOrDefault(entry => entry.Value == weights.Values.Max()).Key;
         return _lastDirection;
-    }
-
-    private void PointToPlayer()
-    {
-        // Rotate the transform to point towards the mouse
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, GetAngleToPlayer()));
-    }
-
-    private float GetAngleToPlayer()
-    {
-        Player player = Object.FindObjectOfType<Player>();
-        if (player == null)
-        {
-            return 0;
-        }
-        // Get the position of the mouse
-        Vector3 playerPosition = player.transform.position;
-        // Subtract from the mouseposition to account for direction
-        playerPosition.x -= transform.position.x;
-        playerPosition.y -= transform.position.y;
-        // Apply the correct rotation
-        return Mathf.Atan2(playerPosition.y, playerPosition.x) * Mathf.Rad2Deg;
     }
 
     private bool CanSeePlayer()

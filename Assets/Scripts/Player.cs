@@ -37,8 +37,6 @@ public class Player : MonoBehaviour
     {
         // Using an impulse gives us a slow down effect
         rb.AddForce(_direction * speed, ForceMode2D.Force);
-        // Point it towards the mouse
-        PointToMouse();
     }
 
     // Handles the input from the user when moving
@@ -81,24 +79,5 @@ public class Player : MonoBehaviour
             // When can we fire next?
             _nextFireTime = Time.time + fireCoolDown;
         }
-    }
-
-    private void PointToMouse()
-    {
-        // Rotate the transform to point towards the mouse
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, GetAngleToMouse()));
-    }
-
-    private float GetAngleToMouse()
-    {
-        // Get the position of the mouse
-        Vector3 mousePosition = Input.mousePosition;
-        // Get the position of the spaceship
-        Vector3 objectPosition = Camera.main.WorldToScreenPoint(transform.position);
-        // Subtract from the mouseposition to account for direction
-        mousePosition.x -= objectPosition.x;
-        mousePosition.y -= objectPosition.y;
-        // Apply the correct rotation
-        return Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
     }
 }

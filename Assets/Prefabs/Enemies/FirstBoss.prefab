@@ -148,7 +148,7 @@ MonoBehaviour:
   - {x: 2.3099995, y: -2.31, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 133158
+  m_InstanceId: 138548
   m_LocalBounds:
     m_Center: {x: -0.00000023841858, y: 0, z: 0}
     m_Extent: {x: 2.3099997, y: 2.31, z: 0}
@@ -229,7 +229,6 @@ MonoBehaviour:
   speed: 15
   startActive: 1
   boss: 1
-  followPlayer: 0
   rotationSpeed: 10
   activationDistance: 50
   viewDistance: 100
