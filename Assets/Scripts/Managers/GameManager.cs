@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Save the game and quit when requested
-    private void SaveAndQuit()
+    public void SaveAndQuit()
     {
         // Create a save and write it to disk
         Save save = new Save();

@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
         if (!_active)
         {
             // Find the player
-            Player player = Object.FindObjectOfType<Player>();
+            PlayerMovement player = Object.FindObjectOfType<PlayerMovement>();
             // Check if the player is within the activation area
             if (player != null && Vector3.Distance(transform.position, player.transform.position) < activationDistance)
             {
@@ -147,7 +147,7 @@ public class Enemy : MonoBehaviour
         // Store all of the weights in a dictionary
         Dictionary<Vector3, float> weights = new Dictionary<Vector3, float>();
         // Get a reference to the player to determine distance
-        Player player = Object.FindObjectOfType<Player>();
+        PlayerMovement player = Object.FindObjectOfType<PlayerMovement>();
         if (player == null)
         {
             return Vector3.zero;
@@ -201,7 +201,7 @@ public class Enemy : MonoBehaviour
     private bool CanSeePlayer()
     {
         // Get a reference to the player
-        Player player = Object.FindObjectOfType<Player>();
+        PlayerMovement player = Object.FindObjectOfType<PlayerMovement>();
         if (player == null)
         {
             return false;
@@ -219,7 +219,7 @@ public class Enemy : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         // Find the player
-        Player player = Object.FindObjectOfType<Player>();
+        PlayerMovement player = Object.FindObjectOfType<PlayerMovement>();
         if (player == null)
         {
             return;

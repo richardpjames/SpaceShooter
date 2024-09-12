@@ -28,7 +28,7 @@ public class LookAt : MonoBehaviour
     private float GetAngleToPlayer()
     {
         // Find the player in the scene
-        Player player = Object.FindObjectOfType<Player>();
+        PlayerMovement player = Object.FindObjectOfType<PlayerMovement>();
         if (player == null)
         {
             return 0;

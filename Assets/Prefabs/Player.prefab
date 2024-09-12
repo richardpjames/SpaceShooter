@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6564822171469969683
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6948392592963742127}
-  m_Layer: 6
-  m_Name: FirePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6948392592963742127
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6564822171469969683}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.32, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9153495278908794224}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7523895411473613885
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9153495278908794224}
-  - component: {fileID: 4483982483556978862}
+  - component: {fileID: 5705670978725271303}
   - component: {fileID: 3761421361625658180}
+  - component: {fileID: 2352932751586298040}
   - component: {fileID: 4699892443307772208}
   - component: {fileID: 4222708032303851569}
   - component: {fileID: 6491193978049778168}
@@ -69,11 +39,10 @@ Transform:
   m_LocalPosition: {x: 0.33681798, y: -0.910656, z: 0.030812616}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6948392592963742127}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4483982483556978862
+--- !u!114 &5705670978725271303
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -82,11 +51,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7523895411473613885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6ed519d59ce0704395f0d7e217740f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 76fe4d1cbd7ac71479481193af99dfd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 150
-  firePoint: {fileID: 6948392592963742127}
   projectilePrefab: {fileID: 7465167986471587654, guid: f2650529d19e11c459ab7f8de39e36f0, type: 3}
   fireCoolDown: 0.12
 --- !u!114 &3761421361625658180
@@ -103,6 +70,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   hitEffects: {fileID: 3364240001949862042}
+--- !u!114 &2352932751586298040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7523895411473613885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58fc5d05ff725704d81f467d583c955f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
 --- !u!212 &4699892443307772208
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -182,9 +162,9 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4483982483556978862}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: Move
+      - m_Target: {fileID: 2352932751586298040}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: SetDirectionFromInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -198,8 +178,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4483982483556978862}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 5705670978725271303}
+        m_TargetAssemblyTypeName: PlayerWeapon, Assembly-CSharp
         m_MethodName: Fire
         m_Mode: 0
         m_Arguments:
@@ -213,21 +193,9 @@ MonoBehaviour:
     m_ActionId: 68f7e7ea-3608-4f14-b568-f83001d1eaed
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4483982483556978862}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: Quit
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 86bf47d4-4430-4f60-afb7-b0c655850ac3
-    m_ActionName: Player/Quit[/Keyboard/escape]
+      m_Calls: []
+    m_ActionId: c7dd3707-47a2-41af-8461-a57cd32e954a
+    m_ActionName: Game/Quit[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -321,7 +289,7 @@ MonoBehaviour:
   - {x: 2.34, y: -2.38, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -264876
+  m_InstanceId: 38026
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 2.34, y: 2.38, z: 0}

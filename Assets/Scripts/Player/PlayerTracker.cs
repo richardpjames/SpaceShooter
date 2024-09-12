@@ -6,7 +6,7 @@ public class PlayerTracker : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Player player = Object.FindObjectOfType<Player>();
+        PlayerMovement player = Object.FindObjectOfType<PlayerMovement>();
         if (player != null)
         {
             transform.position = player.transform.position;
